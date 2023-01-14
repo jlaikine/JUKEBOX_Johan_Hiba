@@ -1,0 +1,9 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root{
+	-fx-background-image:url('../image/fond2.png');
+	-fx-background-size:cover;
+}
+
+.list-view{
+-fx-control-inner-background: #e2e5ee;
+}
