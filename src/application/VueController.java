@@ -266,7 +266,7 @@ public class VueController implements Initializable{
 		}
 	}
 
-	public void deleteAlbum() throws SQLException {
+	public boolean deleteAlbum() throws SQLException {
 	
 		for (AlbumChanteur list : model.affichage()) {
 			if (list.getTitle().equals(listAlbum.getSelectionModel().getSelectedItem())) {
@@ -274,10 +274,12 @@ public class VueController implements Initializable{
 				model.supprimeAlbumData(list.getId());
 				listAlbum.getItems().remove(index);
 				
+				int nbAlbumList = listAlbum.getItems().size();
+				nbAlbum.setText("(" + nbAlbumList + ")");
+				return true;
 			}
 		}
-		int nbAlbumList = listAlbum.getItems().size();
-		nbAlbum.setText("(" + nbAlbumList + ")");
+		return false;
 	}
 	
 	//ALBUM BOUTON
@@ -416,7 +418,7 @@ public class VueController implements Initializable{
 		}
 	}
 
-	public void deleteChanteur() throws SQLException, UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
+	public boolean deleteChanteur() throws SQLException, UnsupportedAudioFileException, IOException, LineUnavailableException, InterruptedException {
 		if (listChanteur.getSelectionModel().getSelectedItem() != null) {
 			for (Chanteur list : model.getChanteur()) {
 				String s = list.getNom() + " " + list.getPrenom();
@@ -431,12 +433,14 @@ public class VueController implements Initializable{
 					labelChanteurMusic.setText("---");
 					labelMusic.setText("No music");
 					stopMusic();
+					
+					int nbChanteurList = listChanteur.getItems().size();
+					nbChanteur.setText("(" + nbChanteurList + ")");
+					return true;
 				}
 			}
 		}
-		int nbChanteurList = listChanteur.getItems().size();
-		nbChanteur.setText("(" + nbChanteurList + ")");
-
+		return false;
 	}
 		
 	//CHANTEUR BOUTON
